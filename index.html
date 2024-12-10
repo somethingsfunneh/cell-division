@@ -32,7 +32,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 5px;
-            max-width: 500px; /* Or whatever maximum width you prefer */
+            max-width: 500px;
             display: block;
             margin: 0 auto;
         }
@@ -48,6 +48,19 @@
         .game-link:hover {
             background-color: #1e90ff;
         }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +70,7 @@
         <h2>What is Cell Division?</h2>
         <p>Cell division is the amazing process where one cell becomes two! It's like a cell's way of making copies of itself.</p>
 
-        <img src="https://i.ibb.co/tDbc0dX/download-1.jpg" alt="Cell Division Diagram">
+        <img src="https://i.ibb.co/tDbc0dX/download-1.jpg" alt="Diagram showing stages of cell division, including interphase, prophase, metaphase, anaphase, and telophase">
 
         <h2>Types of Cell Division</h2>
         <ul>
@@ -68,7 +81,7 @@
         <div class="game">
             <h3>Mini-Game: Guess the Stage of Mitosis</h3>
             <p>Can you name the stage of mitosis shown in the image?</p>
-            <img src="https://svg.mindthegraph.com/realistic/mitosis_metaphase/900x772/mitosis_metaphase-04.png" alt="Mitosis Stage">
+            <img src="https://svg.mindthegraph.com/realistic/mitosis_metaphase/900x772/mitosis_metaphase-04.png" alt="Image of a cell in metaphase, with chromosomes aligned at the center">
             <p>Hint: The chromosomes are lining up in the middle of the cell.</p>
             <button onclick="alert('It\'s Metaphase! In this stage, the chromosomes line up in the middle of the cell.')">Reveal Answer</button>
         </div>
@@ -85,7 +98,7 @@
         <div class="game">
             <h3>Cell Division Crossword Puzzle</h3>
             <p>Try this crossword puzzle to test your knowledge!</p>
-            <img src="https://i.ibb.co/B6Pm8F7/Screenshot-2024-12-10-3-08-00-PM.png" alt="Cell Division Crossword Puzzle">
+            <img src="https://i.ibb.co/B6Pm8F7/Screenshot-2024-12-10-3-08-00-PM.png" alt="Preview of a crossword puzzle with clues related to cell division">
             <p>You can solve this puzzle online by clicking <a href="https://puzzel.org/crossword/play?p=-ODm-gOKGN9IcwUjNQzl" target="_blank">here</a>.</p>
         </div>
     </div>
@@ -95,7 +108,7 @@
         <p>Can you solve this secret message about cell division?</p>
         <p>Try to decode the cryptogram and learn an interesting fact about mitosis!</p>
         <div class="game">
-            <img src="https://i.ibb.co/CnTZZRy/Screenshot-2024-12-10-3-25-39-PM.png" alt="Cell Division Cryptogram Preview">
+            <img src="https://i.ibb.co/CnTZZRy/Screenshot-2024-12-10-3-25-39-PM.png" alt="Preview of a cryptogram puzzle about cell division. Letters are replaced with symbols.">
             <p>Click the link below to play the cryptogram game:</p>
             <a href="https://puzzel.org/cryptogram/play?p=-ODmCDkaFeWPZVaiwFK7" target="_blank" class="game-link">Play Cryptogram Game</a>
         </div>
@@ -104,7 +117,25 @@
     <div class="content">
         <h2>Cell Division in Action</h2>
         <p>Watch this amazing time-lapse video of cells dividing:</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/f-ldPgEfAHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/f-ldPgEfAHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>Quick Quiz</h2>
+        <p>Test your knowledge with these questions:</p>
+        <ol>
+            <li>What type of cell division is responsible for growth and repair?</li>
+            <li>In which stage of mitosis do chromosomes line up in the middle of the cell?</li>
+            <li>How many daughter cells are produced in mitosis?</li>
+        </ol>
+        <button onclick="alert('Answers:\n1. Mitosis\n2. Metaphase\n3. Two')">Check Answers</button>
+    </div>
+
+    <div class="content">
+        <h2>Did You Know?</h2>
+        <p>If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!</p>
     </div>
 </body>
 </html>
