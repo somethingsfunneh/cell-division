@@ -9,8 +9,41 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f0f8ff;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #4169e1;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar h2 {
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
         }
         h1, h2 {
             color: #4169e1;
@@ -32,7 +65,6 @@
             max-width: 100%;
             height: auto;
             border-radius: 5px;
-            max-width: 500px;
             display: block;
             margin: 0 auto;
         }
@@ -64,88 +96,97 @@
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>Cell Division Fun!</h1>
-
-        <h2>What is Cell Division?</h2>
-        <p>Cell division is the amazing process where one cell becomes two! It's like a cell's way of making copies of itself.</p>
-
-        <img src="https://i.ibb.co/tDbc0dX/download-1.jpg" alt="Diagram showing stages of cell division, including interphase, prophase, metaphase, anaphase, and telophase">
-
-        <h2>Types of Cell Division</h2>
+    <div class="sidebar">
+        <h2>Quick Links</h2>
         <ul>
-            <li><strong>Mitosis:</strong> This is how your body grows and heals!</li>
-            <li><strong>Meiosis:</strong> This special division makes sperm and egg cells.</li>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#types">Types of Cell Division</a></li>
+            <li><a href="#facts">Fun Facts</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#quiz">Quiz</a></li>
         </ul>
+    </div>
+    <div class="main-content">
+        <div class="content" id="intro">
+            <h1>Cell Division Fun!</h1>
 
-        <div class="game">
-            <h3>Mini-Game: Guess the Stage of Mitosis</h3>
-            <p>Can you name the stage of mitosis shown in the image?</p>
-            <img src="https://svg.mindthegraph.com/realistic/mitosis_metaphase/900x772/mitosis_metaphase-04.png" alt="Image of a cell in metaphase, with chromosomes aligned at the center">
-            <p>Hint: The chromosomes are lining up in the middle of the cell.</p>
-            <button onclick="alert('It\'s Metaphase! In this stage, the chromosomes line up in the middle of the cell.')">Reveal Answer</button>
+            <h2>What is Cell Division?</h2>
+            <p>Cell division is the amazing process where one cell becomes two! It's like a cell's way of making copies of itself.</p>
+
+            <img src="https://i.ibb.co/tDbc0dX/download-1.jpg" alt="Diagram showing stages of cell division, including interphase, prophase, metaphase, anaphase, and telophase">
+
+            <h2 id="types">Types of Cell Division</h2>
+            <ul>
+                <li><strong>Mitosis:</strong> This is how your body grows and heals!</li>
+                <li><strong>Meiosis:</strong> This special division makes sperm and egg cells.</li>
+            </ul>
+
+            <div class="game">
+                <h3>Mini-Game: Guess the Stage of Mitosis</h3>
+                <p>Can you name the stage of mitosis shown in the image?</p>
+                <img src="https://svg.mindthegraph.com/realistic/mitosis_metaphase/900x772/mitosis_metaphase-04.png" alt="Image of a cell in metaphase, with chromosomes aligned at the center">
+                <p>Hint: The chromosomes are lining up in the middle of the cell.</p>
+                <button onclick="alert('It\'s Metaphase! In this stage, the chromosomes line up in the middle of the cell.')">Reveal Answer</button>
+            </div>
         </div>
-    </div>
 
-    <div class="content">
-        <h2>Fun Facts about Cell Division</h2>
-        <ul>
-            <li>Your body makes about 300 billion new cells every day!</li>
-            <li>The fastest-dividing human cells can complete a cell cycle in about 24 hours.</li>
-            <li>Some cells in your body, like nerve cells, almost never divide after you're born.</li>
-        </ul>
-
-        <div class="game">
-            <h3>Cell Division Crossword Puzzle</h3>
-            <p>Try this crossword puzzle to test your knowledge!</p>
-            <img src="https://i.ibb.co/B6Pm8F7/Screenshot-2024-12-10-3-08-00-PM.png" alt="Preview of a crossword puzzle with clues related to cell division">
-            <p>You can solve this puzzle online by clicking <a href="https://puzzel.org/crossword/play?p=-ODm-gOKGN9IcwUjNQzl" target="_blank">here</a>.</p>
+        <div class="content" id="facts">
+            <h2>Fun Facts about Cell Division</h2>
+            <ul>
+                <li>Your body makes about 300 billion new cells every day!</li>
+                <li>The fastest-dividing human cells can complete a cell cycle in about 24 hours.</li>
+                <li>Some cells in your body, like nerve cells, almost never divide after you're born.</li>
+            </ul>
         </div>
-    </div>
 
-    <div class="content">
-        <h2>Cell Division Cryptogram</h2>
-        <p>Can you solve this secret message about cell division?</p>
-        <p>Try to decode the cryptogram and learn an interesting fact about mitosis!</p>
-        <div class="game">
-            <img src="https://i.ibb.co/CnTZZRy/Screenshot-2024-12-10-3-25-39-PM.png" alt="Preview of a cryptogram puzzle about cell division. Letters are replaced with symbols.">
-            <p>Click the link below to play the cryptogram game:</p>
-            <a href="https://puzzel.org/cryptogram/play?p=-ODmCDkaFeWPZVaiwFK7" target="_blank" class="game-link">Play Cryptogram Game</a>
+        <div class="content" id="games">
+            <h2>Games and Puzzles</h2>
+            <div class="game">
+                <h3>Cell Division Crossword Puzzle</h3>
+                <p>Try this crossword puzzle to test your knowledge!</p>
+                <img src="https://i.ibb.co/B6Pm8F7/Screenshot-2024-12-10-3-08-00-PM.png" alt="Preview of a crossword puzzle with clues related to cell division">
+                <p>You can solve this puzzle online by clicking <a href="https://puzzel.org/crossword/play?p=-ODm-gOKGN9IcwUjNQzl" target="_blank">here</a>.</p>
+            </div>
+
+            <div class="game">
+                <h3>Cell Division Cryptogram</h3>
+                <p>Can you solve this secret message about cell division?</p>
+                <img src="https://i.ibb.co/CnTZZRy/Screenshot-2024-12-10-3-25-39-PM.png" alt="Preview of a cryptogram puzzle about cell division. Letters are replaced with symbols.">
+                <a href="https://puzzel.org/cryptogram/play?p=-ODmCDkaFeWPZVaiwFK7" target="_blank" class="game-link">Play Cryptogram Game</a>
+            </div>
+
+            <div class="game">
+                <h3>Cell Division Word Search</h3>
+                <p>Can you find all the words related to cell division in this puzzle?</p>
+                <img src="https://thewordsearch.com/static/puzzle/word-search-7845638.png" alt="Preview of a word search puzzle with words related to cell division">
+                <a href="https://thewordsearch.com/puzzle/7845638/cell-divison/" target="_blank" class="game-link">Play Word Search Game</a>
+            </div>
         </div>
-    </div>
 
-    <div class="content">
-        <h2>Cell Division Word Search</h2>
-        <p>Can you find all the words related to cell division in this puzzle?</p>
-        <div class="game">
-            <img src="https://thewordsearch.com/static/puzzle/word-search-7845638.png" alt="Preview of a word search puzzle with words related to cell division">
-            <p>Click the link below to play the word search game:</p>
-            <a href="https://thewordsearch.com/puzzle/7845638/cell-divison/" target="_blank" class="game-link">Play Word Search Game</a>
+        <div class="content" id="video">
+            <h2>Cell Division in Action</h2>
+            <p>Watch this amazing time-lapse video of cells dividing:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/f-ldPgEfAHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
-    </div>
 
-    <div class="content">
-        <h2>Cell Division in Action</h2>
-        <p>Watch this amazing time-lapse video of cells dividing:</p>
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/f-ldPgEfAHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="content" id="quiz">
+            <h2>Quick Quiz</h2>
+            <p>Test your knowledge with these questions:</p>
+            <ol>
+                <li>What type of cell division is responsible for growth and repair?</li>
+                <li>In which stage of mitosis do chromosomes line up in the middle of the cell?</li>
+                <li>How many daughter cells are produced in mitosis?</li>
+            </ol>
+            <button onclick="alert('Answers:\n1. Mitosis\n2. Metaphase\n3. Two')">Check Answers</button>
         </div>
-    </div>
 
-    <div class="content">
-        <h2>Quick Quiz</h2>
-        <p>Test your knowledge with these questions:</p>
-        <ol>
-            <li>What type of cell division is responsible for growth and repair?</li>
-            <li>In which stage of mitosis do chromosomes line up in the middle of the cell?</li>
-            <li>How many daughter cells are produced in mitosis?</li>
-        </ol>
-        <button onclick="alert('Answers:\n1. Mitosis\n2. Metaphase\n3. Two')">Check Answers</button>
-    </div>
-
-    <div class="content">
-        <h2>Did You Know?</h2>
-        <p>If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!</p>
+        <div class="content">
+            <h2>Did You Know?</h2>
+            <p>If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!</p>
+        </div>
     </div>
 </body>
 </html>
