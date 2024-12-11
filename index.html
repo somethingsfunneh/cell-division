@@ -283,6 +283,50 @@
         loadQuestion();
         </script>
 
+        <div class="content" id="flashcards">
+            <h2>Cell Division Vocabulary Flashcards</h2>
+            <div id="flashcard-container">
+                <div id="flashcard">
+                    <div id="term"></div>
+                    <div id="definition" style="display: none;"></div>
+                </div>
+                <button id="flip-btn">Flip Card</button>
+                <button id="next-card">Next Card</button>
+            </div>
+        </div>
+        
+        <script>
+        const flashcardData = [
+            { term: "Mitosis", definition: "Cell division that results in two genetically identical daughter cells." },
+            { term: "Meiosis", definition: "Cell division that produces gametes with half the number of chromosomes." },
+            { term: "Prophase", definition: "First stage of mitosis where chromosomes condense and become visible." },
+            { term: "Metaphase", definition: "Stage where chromosomes align at the cell's equator." },
+            { term: "Anaphase", definition: "Stage where sister chromatids separate and move to opposite poles." },
+            { term: "Telophase", definition: "Final stage of mitosis where two new nuclei form." },
+            { term: "Cytokinesis", definition: "Division of the cell's cytoplasm to form two separate cells." }
+        ];
+        
+        let currentCard = 0;
+        
+        function loadCard() {
+            document.getElementById('term').textContent = flashcardData[currentCard].term;
+            document.getElementById('definition').textContent = flashcardData[currentCard].definition;
+            document.getElementById('definition').style.display = 'none';
+        }
+        
+        document.getElementById('flip-btn').addEventListener('click', function() {
+            const definition = document.getElementById('definition');
+            definition.style.display = definition.style.display === 'none' ? 'block' : 'none';
+        });
+        
+        document.getElementById('next-card').addEventListener('click', function() {
+            currentCard = (currentCard + 1) % flashcardData.length;
+            loadCard();
+        });
+        
+        loadCard();
+        </script>
+
         <div class="content">
             <h2>Did You Know?</h2>
             <p>If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!</p>
