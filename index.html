@@ -330,41 +330,10 @@
 
         <div class="content" id="study">
             <h2>Cell Division Matching Game</h2>
-            <div id="game-container">
-                <div id="terms"></div>
-                <div id="definitions"></div>
-            </div>
-            <button id="check-matches">Check Matches</button>
-            <div id="game-result"></div>
+            <p>Test your knowledge of cell division terms and definitions with this fun matching game!</p>
+            <p>Click the button below to play the game on Quizlet:</p>
+            <a href="https://quizlet.com/983521998/match?funnelUUID=101c9915-95f6-4c3f-862e-4dc1ad103824" target="_blank" class="game-link">Play Cell Division Matching Game</a>
         </div>
-        
-        <script>
-        const matchingPairs = [
-            { term: "Mitosis", definition: "Cell division for growth and repair" },
-            { term: "Meiosis", definition: "Cell division to produce gametes" },
-            { term: "Prophase", definition: "Chromosomes become visible" },
-            { term: "Metaphase", definition: "Chromosomes line up in the middle" },
-            { term: "Anaphase", definition: "Chromosomes move to opposite poles" },
-            { term: "Telophase", definition: "Nuclear membranes reform" }
-        ];
-        
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-        
-        function createMatchingGame() {
-            const termsContainer = document.getElementById('terms');
-            const defsContainer = document.getElementById('definitions');
-        
-            shuffleArray(matchingPairs);
-        
-            matchingPairs.forEach((pair, index) => {
-                termsContainer.innerHTML += `<div class="match-item" draggable="true" data-index="${index}">${pair.term}</div>`;
-                defsContainer.innerHTML += `<div class="match-item" data-index="${index}">${pair.definition}</div>`;
-            });
 
         <div class="content">
             <h2>Did You Know?</h2>
