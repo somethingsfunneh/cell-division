@@ -182,15 +182,107 @@
         </div>
 
         <div class="content" id="quiz">
-            <h2>Quick Quiz</h2>
-            <p>Test your knowledge with these questions:</p>
-            <ol>
-                <li>What type of cell division is responsible for growth and repair?</li>
-                <li>In which stage of mitosis do chromosomes line up in the middle of the cell?</li>
-                <li>How many daughter cells are produced in mitosis?</li>
-            </ol>
-            <button onclick="alert('Answers:\n1. Mitosis\n2. Metaphase\n3. Two')">Check Answers</button>
+            <h2>Cell Division Quiz Challenge</h2>
+            <p>Test your knowledge with this interactive quiz!</p>
+            <div id="quiz-container">
+                <div id="question-container"></div>
+                <div id="options-container"></div>
+                <button id="submit-btn">Submit Answer</button>
+                <div id="result"></div>
+                <button id="next-btn" style="display: none;">Next Question</button>
+            </div>
         </div>
+        
+        <script>
+        const quizData = [
+            {
+                question: "What type of cell division is responsible for growth and repair?",
+                options: ["Mitosis", "Meiosis", "Photosynthesis", "Respiration"],
+                correct: 0
+            },
+            {
+                question: "In which stage of mitosis do chromosomes line up in the middle of the cell?",
+                options: ["Prophase", "Metaphase", "Anaphase", "Telophase"],
+                correct: 1
+            },
+            {
+                question: "How many daughter cells are produced in mitosis?",
+                options: ["One", "Two", "Three", "Four"],
+                correct: 1
+            },
+            {
+                question: "Which of these is NOT a phase of mitosis?",
+                options: ["Prophase", "Metaphase", "Synthesis", "Telophase"],
+                correct: 2
+            },
+            {
+                question: "What is the purpose of meiosis?",
+                options: ["Body growth", "Wound healing", "Producing gametes", "Cell repair"],
+                correct: 2
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+        
+        function loadQuestion() {
+            const question = quizData[currentQuestion];
+            document.getElementById('question-container').innerHTML = `<h3>${question.question}</h3>`;
+            const optionsHtml = question.options.map((option, index) => 
+                `<label><input type="radio" name="answer" value="${index}"> ${option}</label><br>`
+            ).join('');
+            document.getElementById('options-container').innerHTML = optionsHtml;
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+        
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (!selectedOption) {
+                alert('Please select an answer!');
+                return;
+            }
+            const answer = parseInt(selectedOption.value);
+            const question = quizData[currentQuestion];
+            if (answer === question.correct) {
+                document.getElementById('result').innerHTML = 'Correct! Great job!';
+                score++;
+            } else {
+                document.getElementById('result').innerHTML = `Incorrect. The correct answer is: ${question.options[question.correct]}`;
+            }
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'block';
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
+        
+        function showFinalResult() {
+            document.getElementById('quiz-container').innerHTML = `
+                <h3>Quiz Completed!</h3>
+                <p>Your score: ${score} out of ${quizData.length}</p>
+                <button onclick="restartQuiz()">Restart Quiz</button>
+            `;
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+        
+        document.getElementById('submit-btn').addEventListener('click', checkAnswer);
+        document.getElementById('next-btn').addEventListener('click', nextQuestion);
+        
+        loadQuestion();
+        </script>
 
         <div class="content">
             <h2>Did You Know?</h2>
