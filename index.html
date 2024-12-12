@@ -288,13 +288,116 @@
             <h2>Cell Division Vocabulary Flashcards</h2>
             <div id="flashcard-container">
                 <div id="flashcard">
-                    <div id="term"></div>
-                    <div id="definition" style="display: none;"></div>
+                    <div id="card-inner">
+                        <div id="term" class="card-face"></div>
+                        <div id="definition" class="card-face"></div>
+                    </div>
                 </div>
-                <button id="flip-btn">Flip Card</button>
-                <button id="next-card">Next Card</button>
+                <div id="progress-bar">
+                    <div id="progress"></div>
+                </div>
+                <div id="button-container">
+                    <button id="prev-card">Previous</button>
+                    <button id="flip-btn">Flip Card</button>
+                    <button id="next-card">Next</button>
+                </div>
+                <p id="card-count"></p>
             </div>
         </div>
+        
+        <style>
+        #flashcard-container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        #flashcard {
+            height: 200px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        
+        #card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flipped #card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        #term {
+            background-color: #4169e1;
+            color: white;
+        }
+        
+        #definition {
+            background-color: #e6f3ff;
+            color: #333;
+            transform: rotateY(180deg);
+        }
+        
+        #progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        #progress {
+            width: 0%;
+            height: 100%;
+            background-color: #4169e1;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        
+        #button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background-color: #4169e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #1e90ff;
+        }
+        
+        #card-count {
+            font-size: 14px;
+            color: #666;
+        }
+        </style>
         
         <script>
         const flashcardData = [
@@ -312,16 +415,27 @@
         function loadCard() {
             document.getElementById('term').textContent = flashcardData[currentCard].term;
             document.getElementById('definition').textContent = flashcardData[currentCard].definition;
-            document.getElementById('definition').style.display = 'none';
+            document.getElementById('flashcard').classList.remove('flipped');
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const progress = ((currentCard + 1) / flashcardData.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            document.getElementById('card-count').textContent = `Card ${currentCard + 1} of ${flashcardData.length}`;
         }
         
         document.getElementById('flip-btn').addEventListener('click', function() {
-            const definition = document.getElementById('definition');
-            definition.style.display = definition.style.display === 'none' ? 'block' : 'none';
+            document.getElementById('flashcard').classList.toggle('flipped');
         });
         
         document.getElementById('next-card').addEventListener('click', function() {
             currentCard = (currentCard + 1) % flashcardData.length;
+            loadCard();
+        });
+        
+        document.getElementById('prev-card').addEventListener('click', function() {
+            currentCard = (currentCard - 1 + flashcardData.length) % flashcardData.length;
             loadCard();
         });
         
