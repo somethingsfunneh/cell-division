@@ -335,10 +335,76 @@
             <a href="https://quizlet.com/983521998/match?funnelUUID=101c9915-95f6-4c3f-862e-4dc1ad103824" target="_blank" class="game-link">Play Cell Division Matching Game</a>
         </div>
 
-        <div class="content">
+        <div class="content" id="did-you-know">
             <h2>Did You Know?</h2>
-            <p>If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!</p>
+            <div id="fact-container">
+                <p id="current-fact"></p>
+                <button id="next-fact">Next Fun Fact</button>
+            </div>
         </div>
+        
+        <script>
+        const cellFacts = [
+            "If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!",
+            "Your body makes about 300 billion new cells every day!",
+            "The human body has about 37.2 trillion cells.",
+            "Red blood cells divide at a rate of about 2 million per second in the bone marrow.",
+            "Some cells in your brain, called neurons, stop dividing shortly after birth.",
+            "A fertilized egg cell takes about 24 hours to complete its first division.",
+            "During your lifetime, you will produce about an Olympic-size swimming pool's worth of saliva!",
+            "The fastest-dividing human cells can complete a cell cycle in about 24 hours.",
+            "Skin cells are constantly dividing and replacing themselves. You get a new layer of skin every 2-4 weeks!"
+        ];
+        
+        let currentFactIndex = 0;
+        
+        function displayFact() {
+            const factElement = document.getElementById('current-fact');
+            factElement.style.opacity = 0;
+            setTimeout(() => {
+                factElement.textContent = cellFacts[currentFactIndex];
+                factElement.style.opacity = 1;
+                currentFactIndex = (currentFactIndex + 1) % cellFacts.length;
+            }, 500);
+        }
+        
+        document.getElementById('next-fact').addEventListener('click', displayFact);
+        
+        // Display the first fact when the page loads
+        displayFact();
+        </script>
+        
+        <style>
+        #fact-container {
+            background-color: #e6f3ff;
+            border: 2px solid #4169e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        #current-fact {
+            font-size: 18px;
+            margin-bottom: 15px;
+            min-height: 50px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        #next-fact {
+            background-color: #4169e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        #next-fact:hover {
+            background-color: #1e90ff;
+        }
+        </style>
     </div>
 </body>
 </html>
