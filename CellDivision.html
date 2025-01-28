@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Division</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #4169e1;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar h2 {
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #4169e1;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .game {
+            background-color: #e6f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+        }
+        .game-link {
+            display: inline-block;
+            background-color: #4169e1;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .game-link:hover {
+            background-color: #1e90ff;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#types">Types of Cell Division</a></li>
+            <li><a href="#facts">Fun Facts</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+            <li><a href="#study">study tools</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="content" id="intro">
+            <h1>Cell Division</h1>
+
+            <h2>What is Cell Division?</h2>
+            <p>Cell division is the amazing process where one cell becomes two! It's like a cell's way of making copies of itself.</p>
+
+            <img src="data:image/jpeg;base64,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" alt="Diagram showing stages of cell division, including interphase, prophase, metaphase, anaphase, and telophase">
+
+            <h2 id="types">Types of Cell Division</h2>
+            <ul>
+                <li><strong>Mitosis:</strong> This is how your body grows and heals!</li>
+                <li><strong>Meiosis:</strong> This special division makes sperm and egg cells.</li>
+            </ul>
+
+            <div class="game">
+                <h3>Mini-Game: Guess the Stage of Mitosis</h3>
+                <p>Can you name the stage of mitosis shown in the image?</p>
+                <img src="https://svg.mindthegraph.com/realistic/mitosis_metaphase/900x772/mitosis_metaphase-04.png" alt="Image of a cell in metaphase, with chromosomes aligned at the center">
+                <p>Hint: The chromosomes are lining up in the middle of the cell.</p>
+                <button onclick="alert('It\'s Metaphase! In this stage, the chromosomes line up in the middle of the cell.')">Reveal Answer</button>
+            </div>
+        </div>
+
+        <div class="content" id="facts">
+            <h2>Fun Facts about Cell Division</h2>
+            <ul>
+                <li>Your body makes about 300 billion new cells every day!</li>
+                <li>The fastest-dividing human cells can complete a cell cycle in about 24 hours.</li>
+                <li>Some cells in your body, like nerve cells, almost never divide after you're born.</li>
+            </ul>
+        </div>
+
+        <div class="content" id="games">
+            <h2>Games and Puzzles</h2>
+            <div class="game">
+                <h3>Cell Division Crossword Puzzle</h3>
+                <p>Try this crossword puzzle to test your knowledge!</p>
+                <img src="data:image/png;base64,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" alt="Preview of a crossword puzzle with clues related to cell division">
+                <p>You can solve this puzzle online by clicking <a href="https://puzzel.org/crossword/play?p=-ODm-gOKGN9IcwUjNQzl" target="_blank">here</a>.</p>
+            </div>
+
+            <div class="game">
+                <h3>Cell Division Cryptogram</h3>
+                <p>Can you solve this secret message about cell division?</p>
+                <img src="https://www.techtarget.com/rms/onlineImages/whatis-cryptogram_mobile.jpg" alt="Preview of a cryptogram puzzle about cell division. Letters are replaced with symbols.">
+                <a href="https://puzzel.org/cryptogram/play?p=-ODmCDkaFeWPZVaiwFK7" target="_blank" class="game-link">Play Cryptogram Game</a>
+            </div>
+
+            <div class="game">
+                <h3>Cell Division Word Search</h3>
+                <p>Can you find all the words related to cell division in this puzzle?</p>
+                <img src="data:image/jpeg;base64,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" alt="Preview of a word search puzzle with words related to cell division">
+                <a href="https://thewordsearch.com/puzzle/7845638/cell-divison/" target="_blank" class="game-link">Play Word Search Game</a>
+            </div>
+        </div>
+
+        <div class="game">
+            <h2>Cell Division Jeopardy Game</h2>
+            <p>Test your knowledge with this fun Jeopardy-style game about cell division!</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Jeopardy%21_game_board_US.svg/300px-Jeopardy%21_game_board_US.svg.png" alt="Cell Division Jeopardy Game Board">
+            <p>Click the link below to play the Jeopardy game:</p>
+            <a href="https://jeopardylabs.com/play/370b5de8a3" target="_blank" class="game-link">Play Cell Division Jeopardy</a>
+        </div>
+
+        <div class="content" id="video">
+            <h2>Cell Division in Action</h2>
+            <p>Watch this amazing time-lapse video of cells dividing:</p>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/f-ldPgEfAHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="content" id="quiz">
+    <h2>Cell Division Quiz Challenge</h2>
+    <p>Test your knowledge with this interactive quiz!</p>
+    <div id="quiz-container">
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+        <div id="question-container"></div>
+        <div id="options-container"></div>
+        <div id="feedback"></div>
+        <button id="submit-btn">Submit Answer</button>
+        <button id="next-btn" style="display: none;">Next Question</button>
+    </div>
+    <div id="final-result" style="display: none;">
+        <h3>Quiz Completed!</h3>
+        <p id="score-display"></p>
+        <div id="score-chart"></div>
+        <button id="restart-btn">Restart Quiz</button>
+    </div>
+</div>
+
+<style>
+#quiz-container {
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#progress {
+    width: 0%;
+    height: 100%;
+    background-color: #4169e1;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+#question-container {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.option {
+    background-color: #e6f3ff;
+    border: 2px solid #4169e1;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #d0e5ff;
+}
+
+.option.selected {
+    background-color: #4169e1;
+    color: white;
+}
+
+#feedback {
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: 20px;
+}
+
+button {
+    background-color: #4169e1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1e90ff;
+}
+
+#score-chart {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const quizData = [
+    {
+        question: "What type of cell division is responsible for growth and repair?",
+        options: ["Mitosis", "Meiosis", "Photosynthesis", "Respiration"],
+        correct: 0
+    },
+    {
+        question: "In which stage of mitosis do chromosomes line up in the middle of the cell?",
+        options: ["Prophase", "Metaphase", "Anaphase", "Telophase"],
+        correct: 1
+    },
+    {
+        question: "How many daughter cells are produced in mitosis?",
+        options: ["One", "Two", "Three", "Four"],
+        correct: 1
+    },
+    {
+        question: "Which of these is NOT a phase of mitosis?",
+        options: ["Prophase", "Metaphase", "Synthesis", "Telophase"],
+        correct: 2
+    },
+    {
+        question: "What is the purpose of meiosis?",
+        options: ["Body growth", "Wound healing", "Producing gametes", "Cell repair"],
+        correct: 2
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let selectedOption = null;
+
+function loadQuestion() {
+    const question = quizData[currentQuestion];
+    document.getElementById('question-container').innerHTML = `<h3>${question.question}</h3>`;
+    const optionsHtml = question.options.map((option, index) => 
+        `<div class="option" data-index="${index}">${option}</div>`
+    ).join('');
+    document.getElementById('options-container').innerHTML = optionsHtml;
+    document.getElementById('feedback').innerHTML = '';
+    document.getElementById('submit-btn').style.display = 'block';
+    document.getElementById('next-btn').style.display = 'none';
+    updateProgress();
+
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', selectOption);
+    });
+}
+
+function selectOption(e) {
+    document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+    e.target.classList.add('selected');
+    selectedOption = parseInt(e.target.dataset.index);
+}
+
+function checkAnswer() {
+    if (selectedOption === null) {
+        alert('Please select an answer!');
+        return;
+    }
+    const question = quizData[currentQuestion];
+    const feedbackEl = document.getElementById('feedback');
+    if (selectedOption === question.correct) {
+        feedbackEl.innerHTML = 'Correct! Great job!';
+        feedbackEl.style.color = 'green';
+        score++;
+    } else {
+        feedbackEl.innerHTML = `Incorrect. The correct answer is: ${question.options[question.correct]}`;
+        feedbackEl.style.color = 'red';
+    }
+    document.getElementById('submit-btn').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    selectedOption = null;
+    if (currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        showFinalResult();
+    }
+}
+
+function showFinalResult() {
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('final-result').style.display = 'block';
+    document.getElementById('score-display').textContent = `Your score: ${score} out of ${quizData.length}`;
+
+    const ctx = document.getElementById('score-chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Correct', 'Incorrect'],
+            datasets: [{
+                data: [score, quizData.length - score],
+                backgroundColor: ['#4169e1', '#ff6347']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('final-result').style.display = 'none';
+    loadQuestion();
+}
+
+function updateProgress() {
+    const progress = ((currentQuestion + 1) / quizData.length) * 100;
+    document.getElementById('progress').style.width = `${progress}%`;
+}
+
+document.getElementById('submit-btn').addEventListener('click', checkAnswer);
+document.getElementById('next-btn').addEventListener('click', nextQuestion);
+document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+
+loadQuestion();
+</script>
+
+        <div class="content" id="study">
+            <h2>Cell Division Vocabulary Flashcards</h2>
+            <div id="flashcard-container">
+                <div id="flashcard">
+                    <div id="card-inner">
+                        <div id="term" class="card-face"></div>
+                        <div id="definition" class="card-face"></div>
+                    </div>
+                </div>
+                <div id="progress-bar">
+                    <div id="progress"></div>
+                </div>
+                <div id="button-container">
+                    <button id="prev-card">Previous</button>
+                    <button id="flip-btn">Flip Card</button>
+                    <button id="next-card">Next</button>
+                </div>
+                <p id="card-count"></p>
+            </div>
+        </div>
+        
+        <style>
+        #flashcard-container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        #flashcard {
+            height: 200px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        
+        #card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flipped #card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        #term {
+            background-color: #4169e1;
+            color: white;
+        }
+        
+        #definition {
+            background-color: #e6f3ff;
+            color: #333;
+            transform: rotateY(180deg);
+        }
+        
+        #progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        #progress {
+            width: 0%;
+            height: 100%;
+            background-color: #4169e1;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        
+        #button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background-color: #4169e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #1e90ff;
+        }
+        
+        #card-count {
+            font-size: 14px;
+            color: #666;
+        }
+        </style>
+        
+        <script>
+        const flashcardData = [
+            { term: "Mitosis", definition: "Cell division that results in two genetically identical daughter cells." },
+            { term: "Meiosis", definition: "Cell division that produces gametes with half the number of chromosomes." },
+            { term: "Prophase", definition: "First stage of mitosis where chromosomes condense and become visible." },
+            { term: "Metaphase", definition: "Stage where chromosomes align at the cell's equator." },
+            { term: "Anaphase", definition: "Stage where sister chromatids separate and move to opposite poles." },
+            { term: "Telophase", definition: "Final stage of mitosis where two new nuclei form." },
+            { term: "Cytokinesis", definition: "Division of the cell's cytoplasm to form two separate cells." }
+        ];
+        
+        let currentCard = 0;
+        
+        function loadCard() {
+            document.getElementById('term').textContent = flashcardData[currentCard].term;
+            document.getElementById('definition').textContent = flashcardData[currentCard].definition;
+            document.getElementById('flashcard').classList.remove('flipped');
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const progress = ((currentCard + 1) / flashcardData.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            document.getElementById('card-count').textContent = `Card ${currentCard + 1} of ${flashcardData.length}`;
+        }
+        
+        document.getElementById('flip-btn').addEventListener('click', function() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        });
+        
+        document.getElementById('next-card').addEventListener('click', function() {
+            currentCard = (currentCard + 1) % flashcardData.length;
+            loadCard();
+        });
+        
+        document.getElementById('prev-card').addEventListener('click', function() {
+            currentCard = (currentCard - 1 + flashcardData.length) % flashcardData.length;
+            loadCard();
+        });
+        
+        loadCard();
+        </script>
+
+        <div class="content" id="study">
+            <h2>Cell Division Matching Game</h2>
+            <p>Test your knowledge of cell division terms and definitions with this fun matching game!</p>
+            <p>Click the button below to play the game on Quizlet:</p>
+            <a href="https://quizlet.com/983521998/match?funnelUUID=101c9915-95f6-4c3f-862e-4dc1ad103824" target="_blank" class="game-link">Play Cell Division Matching Game</a>
+        </div>
+
+        <div class="content" id="did-you-know">
+            <h2>Did You Know?</h2>
+            <div id="fact-container">
+                <p id="current-fact"></p>
+                <button id="next-fact">Next Fun Fact</button>
+            </div>
+        </div>
+        
+        <script>
+        const cellFacts = [
+            "If all the DNA in your body was stretched out, it would reach from the Earth to the Sun and back more than 600 times!",
+            "Your body makes about 300 billion new cells every day!",
+            "The human body has about 37.2 trillion cells.",
+            "Red blood cells divide at a rate of about 2 million per second in the bone marrow.",
+            "Some cells in your brain, called neurons, stop dividing shortly after birth.",
+            "A fertilized egg cell takes about 24 hours to complete its first division.",
+            "During your lifetime, you will produce about an Olympic-size swimming pool's worth of saliva!",
+            "The fastest-dividing human cells can complete a cell cycle in about 24 hours.",
+            "Skin cells are constantly dividing and replacing themselves. You get a new layer of skin every 2-4 weeks!"
+        ];
+        
+        let currentFactIndex = 0;
+        
+        function displayFact() {
+            const factElement = document.getElementById('current-fact');
+            factElement.style.opacity = 0;
+            setTimeout(() => {
+                factElement.textContent = cellFacts[currentFactIndex];
+                factElement.style.opacity = 1;
+                currentFactIndex = (currentFactIndex + 1) % cellFacts.length;
+            }, 500);
+        }
+        
+        document.getElementById('next-fact').addEventListener('click', displayFact);
+        
+        // Display the first fact when the page loads
+        displayFact();
+        </script>
+        
+        <style>
+        #fact-container {
+            background-color: #e6f3ff;
+            border: 2px solid #4169e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        #current-fact {
+            font-size: 18px;
+            margin-bottom: 15px;
+            min-height: 50px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        #next-fact {
+            background-color: #4169e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        #next-fact:hover {
+            background-color: #1e90ff;
+        }
+        </style>
+    </div>
+</body>
+</html>
