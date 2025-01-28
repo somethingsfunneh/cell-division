@@ -407,8 +407,239 @@
             <h2>Study Tools 📚</h2>
         
             <div class="flashcards">
-                <h3>Flashcards</h3>
-                <!-- Add your flashcard content here -->
+                <div id="flashcard-container">
+                    <div id="flashcard">
+                        <div id="card-inner">
+                            <div id="term" class="card-face"></div>
+                            <div id="definition" class="card-face"></div>
+                        </div>
+                    </div>
+                    <div id="progress-bar">
+                        <div id="progress"></div>
+                    </div>
+                    <div id="button-container">
+                        <button id="prev-card">Previous</button>
+                        <button id="flip-btn">Flip Card</button>
+                        <button id="next-card">Next</button>
+                    </div>
+                    <p id="card-count"></p>
+                </div>
+            </div>
+            
+            <style>
+            #flashcard-container {
+                max-width: 400px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            
+            #flashcard {
+                height: 200px;
+                perspective: 1000px;
+                margin-bottom: 20px;
+            }
+            
+            #card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+            }
+            
+            .flipped #card-inner {
+                transform: rotateY(180deg);
+            }
+            
+            .card-face {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            
+            #term {
+                background-color: #4169e1;
+                color: white;
+            }
+            
+            #definition {
+                background-color: #e6f3ff;
+                color: #333;
+                transform: rotateY(180deg);
+            }
+            
+            #progress-bar {
+                width: 100%;
+                height: 10px;
+                background-color: #e0e0e0;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            
+            #progress {
+                width: 0%;
+                height: 100%;
+                background-color: #4169e1;
+                border-radius: 5px;
+                transition: width 0.3s ease;
+            }
+            
+            #button-container {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+            
+            button {
+                background-color: #4169e1;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            
+            button:hover {
+                background-color: #1e90ff;
+            }
+            
+            #card-count {
+                font-size: 14px;
+                color: #666;
+            }
+            </style>
+            
+            <script>
+            const flashcardData = [
+                { term: "Active Transport", definition: "Movement of molecules across a cell membrane against a concentration gradient, requiring energy (ATP)." },
+                { term: "Passive Transport", definition: "Movement of molecules from high to low concentration without using energy." },
+                { term: "Osmosis", definition: "The movement of water molecules across a selectively permeable membrane." },
+                { term: "Diffusion", definition: "Random movement of molecules from areas of high concentration to low concentration." },
+                { term: "Facilitated Diffusion", definition: "Movement of molecules through protein channels in the cell membrane." },
+                { term: "Endocytosis", definition: "Process where cells absorb material by engulfing it in a vesicle." },
+                { term: "Exocytosis", definition: "Process where cells release materials through vesicles that fuse with the membrane." }
+            ];
+            
+            let currentCard = 0;
+            
+            function loadCard() {
+                document.getElementById('term').textContent = flashcardData[currentCard].term;
+                document.getElementById('definition').textContent = flashcardData[currentCard].definition;
+                document.getElementById('flashcard').classList.remove('flipped');
+                updateProgress();
+            }
+            
+            function updateProgress() {
+                const progress = ((currentCard + 1) / flashcardData.length) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+                document.getElementById('card-count').textContent = `Card ${currentCard + 1} of ${flashcardData.length}`;
+            }
+            
+            document.getElementById('flip-btn').addEventListener('click', function() {
+                document.getElementById('flashcard').classList.toggle('flipped');
+            });
+            
+            document.getElementById('next-card').addEventListener('click', function() {
+                currentCard = (currentCard + 1) % flashcardData.length;
+                loadCard();
+            });
+            
+            document.getElementById('prev-card').addEventListener('click', function() {
+                currentCard = (currentCard - 1 + flashcardData.length) % flashcardData.length;
+                loadCard();
+            });
+            
+            loadCard();
+            </script>
+    
+            <div class="content" id="study">
+                <h2>Cell Division Matching Game</h2>
+                <p>Test your knowledge of cell division terms and definitions with this fun matching game!</p>
+                <p>Click the button below to play the game on Quizlet:</p>
+                <a href="https://quizlet.com/983521998/match?funnelUUID=101c9915-95f6-4c3f-862e-4dc1ad103824" target="_blank" class="game-link">Play Cell Division Matching Game</a>
+            </div>
+    
+            <div class="content" id="did-you-know">
+                <h2>Did You Know?</h2>
+                <div id="fact-container">
+                    <p id="current-fact"></p>
+                    <button id="next-fact">Next Fun Fact</button>
+                </div>
+            </div>
+            
+            <script>
+            const cellFacts = [
+                "A single cell can transport millions of molecules per second!",
+                "Cell membranes are so thin they're only visible with electron microscopes.",
+                "Water makes up about 70% of a cell's content.",
+                "Cells can recognize and remove damaged proteins.",
+                "Some transport proteins can move 100 million molecules per second!",
+                "Cell membranes repair themselves when damaged.",
+                "Cells can change shape to move and capture food.",
+                "Every cell in your body uses active transport.",
+                "Your cells use about 50% of their energy just moving molecules in and out."
+            ];
+            
+            let currentFactIndex = 0;
+            
+            function displayFact() {
+                const factElement = document.getElementById('current-fact');
+                factElement.style.opacity = 0;
+                setTimeout(() => {
+                    factElement.textContent = cellFacts[currentFactIndex];
+                    factElement.style.opacity = 1;
+                    currentFactIndex = (currentFactIndex + 1) % cellFacts.length;
+                }, 500);
+            }
+            
+            document.getElementById('next-fact').addEventListener('click', displayFact);
+            
+            // Display the first fact when the page loads
+            displayFact();
+            </script>
+            
+            <style>
+            #fact-container {
+                background-color: #e6f3ff;
+                border: 2px solid #4169e1;
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 20px;
+            }
+            
+            #current-fact {
+                font-size: 18px;
+                margin-bottom: 15px;
+                min-height: 50px;
+                transition: opacity 0.5s ease-in-out;
+            }
+            
+            #next-fact {
+                background-color: #4169e1;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+            
+            #next-fact:hover {
+                background-color: #1e90ff;
+            }
+            </style>
             </div>
         
             <div class="summary">
